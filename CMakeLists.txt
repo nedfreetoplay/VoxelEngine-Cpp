@@ -18,10 +18,12 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     endif()
 endif()
 
+add_subdirectory(rust)
 add_subdirectory(src)
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
+                           ${CMAKE_CURRENT_SOURCE_DIR}/rust/corrosion_generated/cxxbridge/wasm_bridge/include)
 
 if(VOXELENGINE_BUILD_APPDIR)
     include(${CMAKE_CURRENT_SOURCE_DIR}/dev/cmake/BuildAppdir.cmake)
@@ -67,10 +69,10 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} VoxelEngineSrc winmm)
+    target_link_libraries(${PROJECT_NAME} VoxelEngineSrc winmm wasm_bridge)
 endif()
 
-target_link_libraries(${PROJECT_NAME} VoxelEngineSrc ${CMAKE_DL_LIBS})
+target_link_libraries(${PROJECT_NAME} VoxelEngineSrc ${CMAKE_DL_LIBS} wasm_bridge)
 
 # Deploy res to build dir
 add_custom_command(

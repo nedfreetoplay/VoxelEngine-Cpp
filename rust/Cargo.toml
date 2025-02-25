@@ -1,0 +1,14 @@
+[package]
+name = "wasm_integration"
+version = "0.1.0"
+publish = false
+edition = "2024"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+cxx = "1.0.141"
+
+[build-dependencies]
+cxx-build = "1.0.141"

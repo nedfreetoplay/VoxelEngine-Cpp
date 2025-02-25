@@ -3,6 +3,8 @@
 #include "util/command_line.hpp"
 #include "debug/Logger.hpp"
 
+#include <wasm_bridge/lib.h>
+
 #include <csignal>
 #include <iostream>
 #include <stdexcept>
@@ -14,6 +16,8 @@ static void sigterm_handler(int signum) {
 }
 
 int main(int argc, char** argv) {
+    ned::rust::print_from_rust();
+
     CoreParameters coreParameters;
     try {
         if (!parse_cmdline(argc, argv, coreParameters)) {
