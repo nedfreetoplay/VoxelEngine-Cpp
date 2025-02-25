@@ -23,7 +23,11 @@ add_subdirectory(src)
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
-                           ${CMAKE_CURRENT_SOURCE_DIR}/rust/corrosion_generated/cxxbridge/wasm_bridge/include)
+                           ${CMAKE_CURRENT_SOURCE_DIR}/rust/corrosion_generated/cxxbridge/wasm_bridge/include
+                           PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_include_directories(wasm_bridge PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 
 if(VOXELENGINE_BUILD_APPDIR)
     include(${CMAKE_CURRENT_SOURCE_DIR}/dev/cmake/BuildAppdir.cmake)
@@ -88,3 +92,10 @@ if(VOXELENGINE_BUILD_TESTS)
 endif()
 
 add_subdirectory(vctest)
+
+if (CMAKE_CXX_LINK_GROUP_USING_RESCAN_SUPPORTED)
+    target_link_libraries(VoxelEngineSrc INTERFACE
+        "$<LINK_GROUP:RESCAN,wasm_bridge,VoxelEngineSrc>")
+else()
+    target_link_libraries(VoxelEngineSrc INTERFACE wasm_bridge)
+endif()

@@ -74,6 +74,7 @@ include_directories(${CURL_INCLUDE_DIR})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(
     ${PROJECT_NAME}
+    PUBLIC
     ${LIBS}
     glfw
     OpenGL::GL
@@ -84,4 +85,7 @@ target_link_libraries(
     CURL::libcurl
     ${VORBISLIB}
     ${LUA_LIBRARIES}
-    ${CMAKE_DL_LIBS})
+    ${CMAKE_DL_LIBS}
+    wasm_bridge)
+
+target_link_libraries(wasm_bridge PRIVATE VoxelEngineSrc)
