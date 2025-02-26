@@ -15,5 +15,5 @@ corrosion_import_crate(
 
 corrosion_add_cxxbridge(wasm_bridge
     CRATE wasm_integration
-    FILES lib.rs
+    FILES lib.rs ffi/logger.rs
 )

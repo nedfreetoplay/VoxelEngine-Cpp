@@ -20,6 +20,10 @@ LogMessage::~LogMessage() {
 Logger::Logger(std::string name) : name(std::move(name)) {
 }
 
+std::unique_ptr<Logger> new_logger(const std::string& name) {
+    return std::make_unique<Logger>(name);
+}
+
 void Logger::log(
     LogLevel level, const std::string& name, const std::string& message
 ) {

@@ -4,8 +4,10 @@
 #include <mutex>
 #include <sstream>
 
+#include "cxx.h"
+
 namespace debug {
-    enum class LogLevel { print, debug, info, warning, error };
+    enum class LogLevel : uint8_t { print, debug, info, warning, error };
 
     class Logger;
 
@@ -66,4 +68,8 @@ namespace debug {
             return LogMessage(this, LogLevel::print);
         }
     };
+    
+    /// @brief Create a new logger
+    /// Оболочка для Rust кода
+    std::unique_ptr<Logger> new_logger(const std::string& name);
 }

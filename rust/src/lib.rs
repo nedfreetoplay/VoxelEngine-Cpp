@@ -11,8 +11,12 @@ mod ffi {
     }
 }
 
+#[path ="ffi/logger.rs"]
+mod logger;
+
 fn print_from_rust() {
-    println!("Hello from Rust!");
+    let l = logger::new_logger("lib.rs");
+    logger::log(&l, 0, "Hello from Rust");
 
     ffi::hello_from_cpp();
 }
