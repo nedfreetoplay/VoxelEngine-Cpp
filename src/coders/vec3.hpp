@@ -34,6 +34,12 @@ namespace vec3 {
         File(File&&) = default;
 
         File& operator=(File&&) = default;
+        File(
+            std::unordered_map<std::string, Model>&& m,
+            std::vector<Material>&& mat
+        )
+            : models(std::move(m)), materials(std::move(mat)) {
+        }
     };
 
     File load(const std::string_view file, const util::Buffer<ubyte>& src);

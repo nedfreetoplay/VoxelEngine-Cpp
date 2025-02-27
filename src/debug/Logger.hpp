@@ -4,6 +4,11 @@
 #include <mutex>
 #include <sstream>
 
+template <class T>
+concept Printable = requires(std::stringstream & os, T a) {
+    os << a;
+};
+
 namespace debug {
     enum class LogLevel { print, debug, info, warning, error };
 
@@ -19,7 +24,7 @@ namespace debug {
         }
         ~LogMessage();
 
-        template <class T>
+        template <Printable T>
         LogMessage& operator<<(const T& x) {
             ss << x;
             return *this;

@@ -4,7 +4,7 @@ project(VoxelEngine)
 option(VOXELENGINE_BUILD_APPDIR "" OFF)
 option(VOXELENGINE_BUILD_TESTS "" OFF)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -28,6 +28,8 @@ if(VOXELENGINE_BUILD_APPDIR)
 endif()
 
 if(MSVC)
+    add_compile_options(/std:c++20 /experimental:module /module:stdIfAvailable)
+
     if(NOT CMAKE_BUILD_TYPE)
         set(CMAKE_BUILD_TYPE
             Release

@@ -1,6 +1,6 @@
 project(VoxelEngineSrc)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
@@ -68,6 +68,21 @@ if(UNIX)
     find_package(Threads REQUIRED)
     set(LIBS ${LIBS} Threads::Threads)
 endif()
+
+#set(WASMER_LIB_DIR "$ENV{WASMER_DIR}/lib")
+#set(WASMER_INCLUDE_DIR "$ENV{WASMER_DIR}/include")
+
+#message(STATUS "WASMER Include Dir: ${WASMER_INCLUDE_DIR}")
+#message(STATUS "WASMER Lib Dir: ${WASMER_LIB_DIR}")
+
+#find_library(WASMER_LIB wasmer PATHS ${WASMER_LIB_DIR})
+#if(WASMER_LIB)
+#    target_link_libraries(${PROJECT_NAME} ${WASMER_LIB})
+#    include_directories(${WASMER_INCLUDE_DIR})
+#    link_directories(${WASMER_LIB_DIR})
+# else()
+#     message(FATAL_ERROR "wasmer.lib not found in ${WASMER_LIB_DIR}")
+#endif()
 
 include_directories(${LUA_INCLUDE_DIR})
 include_directories(${CURL_INCLUDE_DIR})

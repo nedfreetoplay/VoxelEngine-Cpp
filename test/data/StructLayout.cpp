@@ -35,11 +35,11 @@ TEST(StructLayout, Unicode) {
      auto layout = StructLayout::create(fields);
      EXPECT_EQ(layout.size(), 5);
 
-     layout.setUnicode(buffer, u8"テキストデモ", "text");
-     EXPECT_EQ(layout.getChars(buffer, "text"), std::string(u8"テ"));
+     layout.setUnicode(buffer, "テキストデモ", "text");
+     EXPECT_EQ(layout.getChars(buffer, "text"), std::string("テ"));
 
-     layout.setUnicode(buffer, u8"пример", "text");
-     EXPECT_EQ(layout.getChars(buffer, "text"), std::string(u8"пр"));
+     layout.setUnicode(buffer, "пример", "text");
+     EXPECT_EQ(layout.getChars(buffer, "text"), std::string("пр"));
 }
 
 TEST(StructLayout, ConvertReorder) {

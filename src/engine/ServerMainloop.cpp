@@ -36,7 +36,7 @@ void ServerMainloop::run() {
 
     logger.info() << "starting test " << coreParams.scriptFile.string();
     auto process = scripting::start_coroutine(
-        "script:" + coreParams.scriptFile.filename().u8string()
+        "script:" + coreParams.scriptFile.filename().string()
     );
 
     double targetDelta = 1.0 / static_cast<double>(TPS);

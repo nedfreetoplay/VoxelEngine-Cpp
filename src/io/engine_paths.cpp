@@ -34,8 +34,8 @@ void EnginePaths::prepare() {
             resourcesFolder.string() + " is not a directory"
         );
     }
-    logger.info() << "resources folder: " << fs::canonical(resourcesFolder).u8string();
-    logger.info() << "user files folder: " << fs::canonical(userFilesFolder).u8string();
+    logger.info() << "resources folder: " << fs::canonical(resourcesFolder).string();
+    logger.info() << "user files folder: " << fs::canonical(userFilesFolder).string();
     
     auto contentFolder = io::path("user:") / CONTENT_FOLDER;
     if (!io::is_directory(contentFolder)) {
